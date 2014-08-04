@@ -88,7 +88,7 @@ public class scene extends JFrame implements ActionListener,Runnable  {
 		this.setVisible(true);
 	}
 	@SuppressWarnings("deprecation")
-	@Override
+	
 	public void actionPerformed(ActionEvent e) 
 	{
 		// TODO Auto-generated method stub
@@ -176,7 +176,7 @@ public class scene extends JFrame implements ActionListener,Runnable  {
 						}
 	}
 
-	@Override
+	
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true){

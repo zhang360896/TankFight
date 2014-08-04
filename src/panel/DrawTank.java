@@ -241,7 +241,7 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 		repaint();
 	}
 	
-	public void moveTank(int check, Tank tk) 
+	public void moveTank(int check, Tank tk) //AI inside here
 	{
 		boolean can_go = true;
 		if (check == 2) {
@@ -412,6 +412,30 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 			}
 			
 		}
+		//some AIs
+		//
+		if (tk != this.mt){
+			Random rand = new Random();
+			int jud = rand.nextInt()%20;
+			System.out.println("jud:"+jud);
+			if (this.mt.rotate != (tk.rotate+2)%4 && jud<=5){
+				if (this.mt.x < tk.x)tk.rotate = 3;
+				else if (this.mt.x > tk.x)tk.rotate = 1;
+				else if (this.mt.y < tk.y)tk.rotate = 0;
+				else if (this.mt.y > tk.y)tk.rotate = 2;
+				
+				
+			}
+			//while my bullet is facing an enemy's tank. it will change its direction to avoid being hitten
+			for (int i = 0; i < mt.blt_v.size(); i ++){
+				if ( (mt.blt_v.get(i).x >= (tk.x) && mt.blt_v.get(i).x <= (tk.x+tk.size))|| (mt.blt_v.get(i).y >= (tk.y) && mt.blt_v.get(i).y <= (tk.y+tk.size))){
+					if (mt.blt_v.get(i).direction == (check+2)%4){ 
+						tk.rotate ++;
+						break;
+					}
+				}
+			}
+		}
 		tk.rotate %= 4;
 		repaint();
 	}
@@ -517,19 +541,16 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 				(2 * blt.x + blt.size) / 2, (2 * blt.y + blt.size) / 2));
 	}
 
-	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true) {
@@ -545,7 +566,7 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 				// Random rand = new Random();
 				// for (int j = 0; j < rand.nextInt(10); j ++){
 				moveTank(this.vtk.get(i).rotate, this.vtk.get(i));
-				shoot_enemy(this.vtk.get(i));
+				//shoot_enemy(this.vtk.get(i));
 				// repaint();
 				// }
 			}
