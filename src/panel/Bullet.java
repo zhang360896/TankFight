@@ -24,7 +24,6 @@ public class Bullet implements Runnable{
 		this.border_y2 = y2;
 		
 	}
-	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true){

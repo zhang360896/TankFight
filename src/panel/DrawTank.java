@@ -36,8 +36,9 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 	Image steel_wall = null;
 	Image my_tank = null;
 	Image other_tank = null;
+	Image grass_wall = null;
+	Image my_home= null;
 	int totank = 2;
-
 	public DrawTank(int win_locx, int win_locy, int win_width, int win_height, int space) {
 		this.border_x1 = 0;//win_locx
 		this.border_y1 = 0;//win_locy
@@ -45,7 +46,7 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 		this.border_y2 = win_height-60;//win_locy + 
 		this.extra_space = space;
 		this.input_space = 0;
-		mt = new MyTank(0, 0, 0, tk_size, tk_speed, 1,4, this.border_x1,
+		mt = new MyTank(0, 0, this.border_y2-tk_size, tk_size, tk_speed, 1,4, this.border_x1,
 				this.border_y1, this.border_x2, this.border_y2, true);
 		//System.out.println("windows:"+win_locx+" "+win_locy+" "+win_locx
 		// +" "+ win_width+" "+win_locy+" " + win_height);
@@ -68,10 +69,14 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 		try {
 			my_tank = Toolkit.getDefaultToolkit().getImage(
 					Panel.class.getResource("/tank" + mt.type + ".png"));
+			my_home = Toolkit.getDefaultToolkit().getImage(
+					Panel.class.getResource("home.bmp"));
 			other_tank = Toolkit.getDefaultToolkit().getImage(
 					Panel.class.getResource("/tank" + et.type + ".png"));
 			steel_wall = javax.imageio.ImageIO.read(DrawTank.class
 					.getClassLoader().getResourceAsStream("wall.png"));
+			grass_wall = javax.imageio.ImageIO.read(DrawTank.class
+					.getClassLoader().getResourceAsStream("grass.jpg"));
 			bmb_im1 = javax.imageio.ImageIO.read(DrawTank.class
 					.getClassLoader().getResourceAsStream("bomb_1.gif"));
 			// ImageIO.read(new File("bomb_1.gif"));
@@ -99,6 +104,7 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 		//draw the dividen string
 		for (int i = 0; i <= this.border_y2; i += steel_wall.getHeight(null))
 			g.drawImage(steel_wall, this.border_x2, i, steel_wall.getWidth(null), steel_wall.getHeight(null), this);
+		
 		//display the life of me and enemies
 		//display the score of the player
 		String scores = "1P³É¼¨";
@@ -125,6 +131,18 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 		for (int i = 0; i < vtk.size(); i++) {
 			drawTank(g, this.vtk.get(i));
 		}
+		
+		//draw my home
+		//g.drawImage(my_home, 500, 500, 50, 50, this);
+		
+		
+		//draw the grass
+		int counter = 0;
+		
+		for (int i = 0; counter != 14; i += grass_wall.getWidth(null), counter ++){
+			g.drawImage(grass_wall, i, this.mt.size, grass_wall.getWidth(null)+18, grass_wall.getHeight(null), this);
+		}
+		
 		// paint the bullet
 		// My bullet
 		if (!(mt.blt_v.isEmpty())) {
@@ -416,9 +434,10 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 		//
 		if (tk != this.mt){
 			Random rand = new Random();
-			int jud = rand.nextInt()%20;
-			System.out.println("jud:"+jud);
-			if (this.mt.rotate != (tk.rotate+2)%4 && jud<=5){
+			
+			int jud = rand.nextInt(100);
+			//System.out.println("jud:"+jud);
+			if (this.mt.rotate != (tk.rotate+2)%4 && jud<50){
 				if (this.mt.x < tk.x)tk.rotate = 3;
 				else if (this.mt.x > tk.x)tk.rotate = 1;
 				else if (this.mt.y < tk.y)tk.rotate = 0;
