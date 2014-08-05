@@ -37,7 +37,10 @@ public class MyStartPanel extends JPanel implements Runnable{
 					(this.win_height+this.more_space-100)/2);
 		}
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 869d2af16fe06e1bbb7be0df1a4f8fd6d2ec8b8b
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true){

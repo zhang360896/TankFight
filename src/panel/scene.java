@@ -88,7 +88,10 @@ public class scene extends JFrame implements ActionListener,Runnable  {
 		this.setVisible(true);
 	}
 	@SuppressWarnings("deprecation")
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 869d2af16fe06e1bbb7be0df1a4f8fd6d2ec8b8b
 	public void actionPerformed(ActionEvent e) 
 	{
 		// TODO Auto-generated method stub
@@ -176,7 +179,10 @@ public class scene extends JFrame implements ActionListener,Runnable  {
 						}
 	}
 
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 869d2af16fe06e1bbb7be0df1a4f8fd6d2ec8b8b
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true){

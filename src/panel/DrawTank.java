@@ -433,6 +433,7 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 		//some AIs
 		//
 		if (tk != this.mt){
+<<<<<<< HEAD
 			Random rand = new Random();
 			
 			int jud = rand.nextInt(100);
@@ -442,6 +443,15 @@ public class DrawTank extends JPanel implements KeyListener, Runnable {
 				else if (this.mt.x > tk.x)tk.rotate = 1;
 				else if (this.mt.y < tk.y)tk.rotate = 0;
 				else if (this.mt.y > tk.y)tk.rotate = 2;
+=======
+			Random rand = new Random(1000);
+			int jud = rand.nextInt();
+			if (this.mt.rotate != (tk.rotate+2)%4 && jud>=2&&jud<=5){
+				if (this.mt.x < tk.x)tk.rotate = 3;
+				if (this.mt.x > tk.x)tk.rotate = 1;
+				if (this.mt.y < tk.y)tk.rotate = 0;
+				if (this.mt.y > tk.y)tk.rotate = 2;
+>>>>>>> 869d2af16fe06e1bbb7be0df1a4f8fd6d2ec8b8b
 				
 				
 			}
